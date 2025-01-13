@@ -1,0 +1,119 @@
+{% extends "logicaNegocio/base.html" %}
+{% load static %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <!-- Sección Consejos de Reducción de Desperdicio -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-white-transparent p-3 mb-4">
+                    <h5 class="section-title">Consejos de Reducción de Desperdicio</h5>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for result in waste_reduction_results %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ result.title }}</h5>
+                            <a href="{{ result.url }}" target="_blank">
+                                <img src="{{ result.image }}" class="card-img-top mb-2" alt="{{ result.title }}" loading="lazy">
+                            </a>
+                            <p>Haz clic en la imagen para más detalles</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Sección Cómo Aprovechar Todos los Alimentos -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-white-transparent p-3 mb-4">
+                    <h5 class="section-title">Cómo Aprovechar Todos los Alimentos</h5>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for result in food_utilization_results %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ result.title }}</h5>
+                            <a href="{{ result.url }}" target="_blank">
+                                <img src="{{ result.image }}" class="card-img-top mb-2" alt="{{ result.title }}" loading="lazy">
+                            </a>
+                            <p>Haz clic en la imagen para más detalles</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<style>
+    .container {
+        width: 100%;
+        padding: 0 15px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .col-md-4 {
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        max-width: 33.333333%;
+        flex: 0 0 33.333333%;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .bg-white-transparent {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+    }
+
+    .p-3 {
+        padding: 1rem !important;
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    @media (max-width: 450px) {
+        .col-md-4 {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,96 @@
+# Imcocina
+
+Imcocina es una aplicación móvil diseñada para ayudarte a gestionar tus recetas de cocina y planificar tus comidas de manera eficiente.
+
+## Características
+Recetas agregadas por un Administrados si se requiere, checar Base de datos con usuarios de ejemplo.
+
+Registro de Usuarios
+Los usuarios pueden registrarse, iniciar sesión, y restablecer sus contraseñas. La validación de contraseñas asegura que las contraseñas sean seguras.
+
+Gestión de Recetas
+Los usuarios pueden agregar, editar y eliminar recetas. También pueden marcar recetas como favoritas.
+
+## Instalación
+
+1. Clona el repositorio:
+    ```bash
+    git clone https://github.com/tu_usuario/Imcocina.git
+    ```
+2. Navega al directorio del proyecto:
+    ```bash
+    cd Imcocina
+    ```
+3. Crea y activa un entorno virtual:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # En Windows usa `venv\Scripts\activate`
+    ```
+4. Instala las dependencias:
+    ```bash
+    pip install -r requirements.txt
+    ```
+5. Realiza las migraciones de la base de datos:
+    ```bash
+    python manage.py migrate
+    ```
+6. Crea un superusuario para acceder al panel de administración:
+    ```bash
+    python manage.py createsuperuser
+    ```
+7. Inicia el servidor de desarrollo:
+    ```bash
+    python manage.py runserver
+    ```
+
+## Contribución
+
+1. Haz un fork del repositorio.
+2. Crea una nueva rama para tu función o corrección de errores:
+    ```bash
+    git checkout -b nombre-de-tu-rama
+    ```
+3. Realiza tus cambios y haz commit:
+    ```bash
+    git commit -m "Descripción de los cambios"
+    ```
+4. Sube tus cambios a tu repositorio fork:
+    ```bash
+    git push origin nombre-de-tu-rama
+    ```
+5. Crea un Pull Request en el repositorio original.
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+
+## Configuración de Credenciales de la API
+
+Para utilizar la API de Edamam, necesitas configurar tus credenciales de manera segura utilizando variables de entorno. Sigue estos pasos:
+
+1. Crea un archivo `.env` en la raíz de tu proyecto si no lo tienes ya.
+2. Agrega tus credenciales de Edamam al archivo `.env`:
+
+    ```env
+    EDAMAM_APP_ID='tu_app_id'
+    EDAMAM_APP_KEY='tu_app_key'
+    ```
+
+3. Asegúrate de que `django-environ` esté instalado en tu entorno:
+
+    ```sh
+    pip install django-environ
+    ```
+
+4. Las credenciales serán cargadas automáticamente desde el archivo `.env` cuando ejecutes tu proyecto.
+
+De esta manera, tus credenciales estarán seguras y no se subirán al repositorio público.
+
+# Reemplaza las configuraciones sensibles con variables de entorno
+SECRET_KEY = env('SECRET_KEY')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+# Para ejecutar el proyecto desde un un dispotivo Android.
+
+Montar el proyecto en un servidor o nube y agregar la IP del servicio al proyecto de Android Studio.

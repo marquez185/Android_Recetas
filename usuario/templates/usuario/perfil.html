@@ -1,0 +1,51 @@
+{% extends "usuario/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container bf w-75 text-body mt-5 rounded shadow">
+    <div class="row align-items-stretch">
+        <div class="col ig d-none d-md-block d-lg-block rounded-start">
+            <!-- Aquí puedes agregar una imagen o algún contenido adicional -->
+        </div>
+        <div class="col">
+            <h2 class="fw-bold text-white text-center py-5">Perfil del Usuario</h2>
+            {% if messages %}
+                <div>
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <div class="mb-4">
+                    <label class="form-label text-white">Nombre:</label>
+                    <p class="form-control">{{ user.first_name }} {{ user.last_name }}</p>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-white">Correo Electrónico:</label>
+                    <p class="form-control">{{ user.email }}</p>
+                </div>
+                <div class="d-grid mb-3">
+                    <div class="btn-container mb-3">
+                        <a href="{% url 'usuario:UpdatePerfil' %}" class="btn btn-primary btn-custom">Actualizar Perfil</a>
+                    </div>
+                    <div class="btn-container mb-3">
+                        <a href="{% url 'usuario:Favoritas' %}" class="btn btn-secondary btn-custom">Mis recetas favoritas</a>
+                    </div>
+                    <div class="btn-container mb-3">
+                        <a href="{% url 'recetas:RecetasAvaladas' %}" class="btn btn-primary btn-custom">Ver Recetas Avaladas</a>
+                    </div>
+                    {% if user.is_superuser %}
+                    <div class="btn-container mb-3">
+                        <a href="{% url 'recetas:crud_recetas' %}" class="btn btn-warning btn-custom">Administrar Recetas</a>
+                    </div>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning">No has iniciado sesión. <a href="{% url 'usuario:Login' %}">Inicia sesión aquí</a>.</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

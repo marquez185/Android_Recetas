@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Auth</title>
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="{% static 'usuario/css/styleBase.css' %}">
+  <link rel="stylesheet" href="{% static 'usuario/css/styleslogin.css' %}"/>
+</head>
+
+<body>
+  <div class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <header class="bg-primary text-white">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <img src="{% static 'logicaNegocio/img/IMCOCINA_logo.png' %}" alt="IMCOCINA Logo" class="d-inline-block align-top" style="height: 40px;">
+            <a class="navbar-brand text-white" href="{% url 'Index' %}">IMCOCINA</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item nav-item {% if '/buscarRecetas' in request.path %} active {% endif %} px-lg-2">
+                  <a class="nav-link text-white" href="{% url 'recetas:BuscarRecetas' %}">Explorar Recetas</a>
+                </li>
+                <li class="nav-item {% if '/nosotros' in request.path %} active {% endif %} px-lg-2">
+                  <a class="nav-link text-white" href="{% url 'Nosotros' %}">Nosotros</a>
+                </li>
+                <li class="nav-item {% if '/noticias' in request.path %} active {% endif %} px-lg-2">
+                  <a class="nav-link text-white" href="{% url 'Noticias' %}">Noticias Nutrición</a>
+                </li>
+                {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'usuario:Logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                </form>
+              {% endif %}
+              </ul>
+          </div>
+        </nav>
+    </header>  
+
+    <!-- Contenido cambiante-->
+    <main class="flex-fill">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-white text-center py-3 mt-auto">
+      <p>© 2024 IMCOCINA</p>
+      <div>
+          <a href="#" class="text-white">Términos de Uso</a> | <a href="#" class="text-white">Política de Privacidad</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="{% static 'logicaNegocio/js/scripts.js' %}"></script>
+</body>
+
+</html>

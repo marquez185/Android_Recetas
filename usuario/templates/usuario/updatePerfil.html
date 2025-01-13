@@ -1,0 +1,58 @@
+{% extends "usuario/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container bf w-75 text-body mt-5 rounded shadow">
+    <div class="row align-items-stretch">
+        <div class="col ig d-none d-md-block d-lg-block rounded-start">
+            <!-- Aquí puedes agregar una imagen o algún contenido adicional -->
+        </div>
+        <div class="col">
+            <h2 class="fw-bold text-white text-center py-5">Actualizar Perfil</h2>
+            {% if messages %}
+                <div>
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form action="{% url 'usuario:UpdatePerfil' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="nombre" class="form-label text-white">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" value="{{ request.user.first_name }}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="apellido" class="form-label text-white">Apellidos</label>
+                    <input type="text" class="form-control" name="apellido" value="{{ request.user.last_name }}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="form-label text-white">Correo Electrónico</label>
+                    <input type="email" class="form-control" name="email" value="{{ request.user.email }}" required>
+                </div>
+                <hr>
+                <div class="mb-4">
+                    <label for="password_actual" class="form-label text-white">Contraseña Actual</label>
+                    <input type="password" class="form-control" name="password_actual" placeholder="Ingresa tu contraseña actual">
+                </div>
+                <div class="mb-4">
+                    <label for="password_nueva" class="form-label text-white">Nueva Contraseña</label>
+                    <input type="password" class="form-control" name="password_nueva" placeholder="Ingresa tu nueva contraseña">
+                    <small class="text-white-50">La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.</small>
+                </div>
+                <div class="mb-4">
+                    <label for="password_nueva_confirmacion" class="form-label text-white">Confirmar Nueva Contraseña</label>
+                    <input type="password" class="form-control" name="password_nueva_confirmacion" placeholder="Confirma tu nueva contraseña">
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-dark">Actualizar</button>
+                </div>
+            </form>
+            <div class="d-grid mt-3">
+                <a href="{% url 'usuario:Perfil' %}" class="btn btn-light">Volver al Perfil</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

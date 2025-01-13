@@ -1,0 +1,57 @@
+{% extends "usuario/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container bf w-75 mt-5 rounded shadow">
+    <div class="row align-items-stretch">
+        <div class="col rg d-none d-md-block d-lg-block rounded-start">
+            <!-- Aquí puedes agregar una imagen o algún contenido adicional -->
+        </div>
+        <div class="col">
+            <h2 class="fw-bold text-center text-white py-4">Crear cuenta</h2>
+            {% if messages %}
+                <div>
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form action="{% url 'usuario:Registro' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <input type="text" class="form-control" name="nombre" placeholder="Ingresa tu nombre" required>
+                </div>
+                <div class="mb-4">
+                    <input type="text" class="form-control" name="apellido" placeholder="Ingresa tus apellidos" required>
+                </div>
+                <div class="mb-4">
+                    <input type="email" class="form-control" name="email" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+                <div class="mb-4">
+                    <input type="password" class="form-control" name="contrasena" placeholder="Ingresa tu contraseña" required>
+                    <small class="text-white-50">La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.</small>
+                </div>
+                <div class="mb-4">
+                    <input type="password" class="form-control" name="contrasena_correcta" placeholder="Confirma tu contraseña" required>
+                </div>
+                <div class="mb-4 form-check">
+                    <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                    <label class="form-check-label text-white" for="terms">He leído y acepto los <a href="{% url 'terminos_uso' %}" class="text-info" target="_blank">Términos y Condiciones</a></label>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-dark">Crear</button>
+                </div>
+            </form>
+            <div class="my-3 text-white-50 text-center">
+                <p class="mb-2">
+                    ¿Ya tienes una cuenta? 
+                    <a href="{% url 'usuario:Login' %}" class="text-info">Inicia Sesión</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

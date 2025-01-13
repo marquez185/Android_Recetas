@@ -1,0 +1,35 @@
+{% extends "usuario/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container bf w-75 text-body mt-5 rounded shadow">
+    <div class="row align-items-stretch">
+        <div class="col">
+            <h2 class="fw-bold text-white text-center py-5">Verificación de Correo Electrónico</h2>
+            {% if messages %}
+                <div>
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form action="{% url 'usuario:Verificacion' %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="email" class="form-label text-white">Correo Electrónico</label>
+                    <input type="email" class="form-control" name="email" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-dark">Verificar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col vg d-none d-md-block d-lg-block rounded-start">
+            <!-- Aquí puedes agregar una imagen o algún contenido adicional -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

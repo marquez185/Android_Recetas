@@ -1,0 +1,59 @@
+{% extends "usuario/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!--body class="vh-100 overflow-hidden py-5"-->
+    <div class="container bf w-75 text-body mt-5 rounded shadow">
+        <div class="row align-items-stretch">
+            <div class="col ig d-none d-md-block d-lg-block rounded-start">
+                <!-- Aquí puedes agregar una imagen o algún contenido adicional -->
+            </div>
+            <div class="col">
+                <h2 class="fw-bold text-white text-center py-5">Iniciar sesión</h2>
+                {% if messages %}
+                    <div>
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} mt-2 mb-2">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <form action="{% url 'usuario:Login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="email" class="form-label text-white">Correo Electrónico</label>
+                        <input type="email" class="form-control" name="email" placeholder="Ingresa tu correo electrónico" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label text-white">Contraseña</label>
+                        <input type="password" class="form-control" name="password" placeholder="Ingresa tu contraseña" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-dark">Iniciar sesión</button>
+                    </div>
+
+                    <div class="my-3 text-white-50 text-center">
+                        <p class="mb-2">
+                            ¿Olvidaste tu contraseña? 
+                            <a href="{% url 'usuario:Verificacion' %}" class="text-info">Recuperar aquí</a>.
+                        </p>
+                        <p>
+                            ¿No tienes cuenta? 
+                            <a href="{% url 'usuario:Registro' %}" class="text-info">Crear cuenta</a>.
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% if registro_exitoso %}
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'Perfil' %}";
+    }, 4000);
+</script>
+{% endif %}
+
+{% endblock %}
