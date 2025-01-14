@@ -93,4 +93,4 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 # Para ejecutar el proyecto desde un un dispotivo Android.
 
-Montar el proyecto en un servidor o nube y agregar la IP del servicio al proyecto de Android Studio.
+Montar el proyecto en un servidor o nube y agregar la IP del servicio del servicio al proyecto de Android Studio.
